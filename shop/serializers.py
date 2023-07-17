@@ -10,9 +10,16 @@ class DealerSerializer(serializers.ModelSerializer):
     
     
 class CarSerializer(serializers.ModelSerializer):
-  dealer = DealerSerializer(read_only=True)
+  dealer = serializers.PrimaryKeyRelatedField(queryset=Dealer.objects.all())
   
   class Meta:
     model = Car
     fields = "__all__"
+    
+  # def create(self, validated_data):
+  #   dealer_id = validated_data
+  #   print(dealer_id)
+  #   print("ostia!!!")
+  #   car = Car.objects.create(**validated_data)
+  #   return car
   
